@@ -1,14 +1,10 @@
 mod set;
+use set::{CardNumber::*, CardShading::*, CardColour::*, CardShape::*};
 
 fn main() {
     println!("Hello, world!");
 
-    let number = set::CardNumber::One;
-    let shading = set::CardShading::Solid;
-    let colour = set::CardColour::Purple;
-    let shape = set::CardShape::Diamond;
-
-    let card = set::Card { number , shading, colour, shape };
+    let card = set::Card { number: One , shading: Solid, colour: Purple, shape: Diamond };
 
     println!("Card: {}", card);
 }

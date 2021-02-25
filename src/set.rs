@@ -6,6 +6,17 @@ pub enum CardNumber {
     Three,
 }
 
+// TODO there must be an easier way
+impl fmt::Display for CardNumber {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+       match *self {
+           CardNumber::One => write!(f, "one"),
+           CardNumber::Two => write!(f, "two"),
+           CardNumber::Three => write!(f, "three"),
+       }
+    }
+}
+
 pub enum CardShading {
     Solid,
     Striped,
@@ -33,17 +44,10 @@ pub struct Card {
 }
 
 impl Display for Card {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-            /*
-        fmt.write_format
-        fmt.write_str(&self.number)
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        // TODO why should this result be used? Error checking?
+        write!(f, "{}", self.number);
 
-        for name in &self.names {
-            fmt.write_str(str)?;
-            fmt.write_str(name)?;
-            str = ", ";
-        }
-        */
         Ok(())
     }
 
