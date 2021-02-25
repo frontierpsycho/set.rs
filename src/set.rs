@@ -79,11 +79,10 @@ pub struct Card {
 
 impl Display for Card {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        // TODO why should this result be used? Error checking?
-        write!(f, "{} {} {} {}", self.number, self.shading, self.colour, self.shape);
+        write!(f, "{} {} {} {}", self.number, self.shading, self.colour, self.shape)?;
 
         if self.number != CardNumber::One {
-            write!(f, "s");
+            write!(f, "s")?;
         }
 
         Ok(())
