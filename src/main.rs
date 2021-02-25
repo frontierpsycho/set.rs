@@ -1,5 +1,4 @@
-mod set;
-use set::Card;
+use set::card::Card;
 // use set::{CardNumber::*, CardShading::*, CardColour::*, CardShape::*};
 
 fn main() {
