@@ -18,6 +18,7 @@ impl fmt::Display for CardNumber {
     }
 }
 
+#[derive(Copy, Clone)]
 pub enum CardShading {
     Solid,
     Striped,
@@ -34,6 +35,7 @@ impl fmt::Display for CardShading {
     }
 }
 
+#[derive(Copy, Clone)]
 pub enum CardColour {
     Red,
     Purple,
@@ -50,6 +52,7 @@ impl fmt::Display for CardColour {
     }
 }
 
+#[derive(Copy, Clone)]
 pub enum CardShape {
     Oval,
     Diamond,
@@ -131,8 +134,6 @@ pub struct Card {
     pub colour: CardColour,
     pub shape: CardShape,
 }
-
-// TODO random card constructor
 
 impl Card {
     pub fn new() -> Self {
