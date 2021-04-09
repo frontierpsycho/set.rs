@@ -170,6 +170,7 @@ fn random_card_shape() -> Result<CardShape, String>  {
     }
 }
 
+#[derive(Clone,Copy,Hash)]
 pub struct Card {
     pub number: CardNumber,
     pub shading: CardShading,
@@ -193,6 +194,16 @@ impl Card {
         }
     }
 }
+
+impl PartialEq for Card {
+    fn eq(&self, other: &Self) -> bool {
+        self.number == other.number &&
+        self.shading == other.shading &&
+        self.colour == other.colour &&
+        self.shape == other.shape
+    }
+}
+impl Eq for Card {}
 
 // TODO make cards sortable - actually might not be needed, depending on implementation of Set
 
