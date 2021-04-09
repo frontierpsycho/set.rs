@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use lazy_static::lazy_static;
 use rand::random;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, PartialOrd, Ord)]
 pub enum CardNumber {
     One,
     Two,
@@ -30,7 +30,7 @@ impl fmt::Display for CardNumber {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, PartialOrd, Ord)]
 pub enum CardShading {
     Solid,
     Striped,
@@ -57,7 +57,7 @@ impl fmt::Display for CardShading {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, PartialOrd, Ord)]
 pub enum CardColour {
     Red,
     Purple,
@@ -84,7 +84,7 @@ impl fmt::Display for CardColour {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, PartialOrd, Ord)]
 pub enum CardShape {
     Oval,
     Diamond,
@@ -170,7 +170,7 @@ fn random_card_shape() -> Result<CardShape, String>  {
     }
 }
 
-#[derive(Clone,Copy,Hash)]
+#[derive(Clone, Copy, Hash, PartialOrd, Ord)]
 pub struct Card {
     pub number: CardNumber,
     pub shading: CardShading,
@@ -204,8 +204,6 @@ impl PartialEq for Card {
     }
 }
 impl Eq for Card {}
-
-// TODO make cards sortable - actually might not be needed, depending on implementation of Set
 
 impl Display for Card {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
