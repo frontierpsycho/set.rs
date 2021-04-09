@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-use crate::card::Card;
+use crate::card::{*};
 
 fn test_attribute(
     value1: &u32,
@@ -37,14 +37,66 @@ pub fn extrapolate_third(card1: &Card, card2: &Card) -> Card {
         if card1.number == card2.number {
             card1.number
         } else {
-            // TODO no, extrapolate third
-            card1.number
+            // blech
+            let mut extrapolated_third: CardNumber = card1.number;
+            for (&card_number, _) in CARDNUMBERS.iter() {
+                if card_number != card1.number && card_number != card2.number {
+                    extrapolated_third = card_number;
+                }
+            }
+            extrapolated_third
         }
     };
 
-    println!("Extrapolated number (should be three): {}", number);
+    let shading = {
+        // if both are the same, the third should also have the same
+        if card1.shading == card2.shading {
+            card1.shading
+        } else {
+            // blech
+            let mut extrapolated_third: CardShading = card1.shading;
+            for (&card_shading, _) in CARDSHADINGS.iter() {
+                if card_shading != card1.shading && card_shading != card2.shading {
+                    extrapolated_third = card_shading;
+                }
+            }
+            extrapolated_third
+        }
+    };
 
-    Card::new()
+    let colour = {
+        // if both are the same, the third should also have the same
+        if card1.colour == card2.colour {
+            card1.colour
+        } else {
+            // blech
+            let mut extrapolated_third: CardColour = card1.colour;
+            for (&card_colour, _) in CARDCOLOURS.iter() {
+                if card_colour != card1.colour && card_colour != card2.colour {
+                    extrapolated_third = card_colour;
+                }
+            }
+            extrapolated_third
+        }
+    };
+
+    let shape = {
+        // if both are the same, the third should also have the same
+        if card1.shape == card2.shape {
+            card1.shape
+        } else {
+            // blech
+            let mut extrapolated_third: CardShape = card1.shape;
+            for (&card_shape, _) in CARDSHAPES.iter() {
+                if card_shape != card1.shape && card_shape != card2.shape {
+                    extrapolated_third = card_shape;
+                }
+            }
+            extrapolated_third
+        }
+    };
+
+    Card { number: number, shading: shading, colour: colour, shape: shape }
 }
 
 #[cfg(test)]
@@ -74,6 +126,21 @@ mod tests {
         let card1 = Card { number: One, shading: Solid, colour: Red, shape: Squiggle };
         let card2 = Card { number: Two, shading: Striped, colour: Purple, shape: Squiggle };
 
-        extrapolate_third(&card1, &card2);
+        let mut extrapolated_card = extrapolate_third(&card1, &card2);
+
+        assert_eq!(extrapolated_card.number, Three);
+        assert_eq!(extrapolated_card.shading, Outlined);
+        assert_eq!(extrapolated_card.colour, Green);
+        assert_eq!(extrapolated_card.shape, Squiggle);
+
+        let card4 = Card { number: One, shading: Outlined, colour: Purple, shape: Squiggle };
+        let card5 = Card { number: One, shading: Striped, colour: Purple, shape: Squiggle };
+
+        extrapolated_card = extrapolate_third(&card4, &card5);
+
+        assert_eq!(extrapolated_card.number, One);
+        assert_eq!(extrapolated_card.shading, Solid);
+        assert_eq!(extrapolated_card.colour, Purple);
+        assert_eq!(extrapolated_card.shape, Squiggle);
     }
 }
