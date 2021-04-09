@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use lazy_static::lazy_static;
 use rand::random;
 
-#[derive(PartialEq, Eq, Copy, Clone, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
 pub enum CardNumber {
     One,
     Two,
@@ -30,11 +30,21 @@ impl fmt::Display for CardNumber {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
 pub enum CardShading {
     Solid,
     Striped,
     Outlined,
+}
+
+lazy_static! {
+    pub static ref CARDSHADINGS: HashMap<CardShading, &'static str> = {
+        let mut m = HashMap::with_capacity(3);
+        m.insert(CardShading::Solid, "solid");
+        m.insert(CardShading::Striped, "striped");
+        m.insert(CardShading::Outlined, "outlined");
+        m
+    };
 }
 
 impl fmt::Display for CardShading {
@@ -47,11 +57,21 @@ impl fmt::Display for CardShading {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
 pub enum CardColour {
     Red,
     Purple,
     Green,
+}
+
+lazy_static! {
+    pub static ref CARDCOLOURS: HashMap<CardColour, &'static str> = {
+        let mut m = HashMap::with_capacity(3);
+        m.insert(CardColour::Red, "red");
+        m.insert(CardColour::Purple, "purple");
+        m.insert(CardColour::Green, "green");
+        m
+    };
 }
 
 impl fmt::Display for CardColour {
@@ -64,11 +84,21 @@ impl fmt::Display for CardColour {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash)]
 pub enum CardShape {
     Oval,
     Diamond,
     Squiggle,
+}
+
+lazy_static! {
+    pub static ref CARDSHAPES: HashMap<CardShape, &'static str> = {
+        let mut m = HashMap::with_capacity(3);
+        m.insert(CardShape::Oval, "oval");
+        m.insert(CardShape::Diamond, "diamond");
+        m.insert(CardShape::Squiggle, "squiggle");
+        m
+    };
 }
 
 impl fmt::Display for CardShape {
