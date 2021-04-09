@@ -1,20 +1,32 @@
 use std::fmt::{self, Formatter, Display};
+use std::collections::HashMap;
+use lazy_static::lazy_static;
 use rand::random;
 
-#[derive(PartialEq, Eq, Copy, Clone)]
+#[derive(PartialEq, Eq, Copy, Clone, Hash)]
 pub enum CardNumber {
-    One = 0,
+    One,
     Two,
     Three,
 }
 
+lazy_static! {
+    pub static ref CARDNUMBERS: HashMap<CardNumber, &'static str> = {
+        let mut m = HashMap::with_capacity(3);
+        m.insert(CardNumber::One, "one");
+        m.insert(CardNumber::Two, "two");
+        m.insert(CardNumber::Three, "three");
+        m
+    };
+}
+
 impl fmt::Display for CardNumber {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-       match *self {
-           CardNumber::One => write!(f, "one"),
-           CardNumber::Two => write!(f, "two"),
-           CardNumber::Three => write!(f, "three"),
-       }
+        match *self {
+            CardNumber::One => write!(f, "one"),
+            CardNumber::Two => write!(f, "two"),
+            CardNumber::Three => write!(f, "three"),
+        }
     }
 }
 
@@ -27,10 +39,10 @@ pub enum CardShading {
 
 impl fmt::Display for CardShading {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-       match *self {
-           CardShading::Solid => write!(f, "solid"),
-           CardShading::Striped => write!(f, "striped"),
-           CardShading::Outlined => write!(f, "outlined"),
+        match *self {
+            CardShading::Solid => write!(f, "solid"),
+            CardShading::Striped => write!(f, "striped"),
+            CardShading::Outlined => write!(f, "outlined"),
        }
     }
 }
@@ -44,10 +56,10 @@ pub enum CardColour {
 
 impl fmt::Display for CardColour {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-       match *self {
-           CardColour::Red => write!(f, "red"),
-           CardColour::Purple => write!(f, "purple"),
-           CardColour::Green => write!(f, "green"),
+        match *self {
+            CardColour::Red => write!(f, "red"),
+            CardColour::Purple => write!(f, "purple"),
+            CardColour::Green => write!(f, "green"),
        }
     }
 }
