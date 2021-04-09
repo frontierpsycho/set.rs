@@ -104,8 +104,10 @@ pub fn extrapolate_third(card1: &Card, card2: &Card) -> Card {
     Card { number, shading, colour, shape }
 }
 
-pub fn find_a_set(board: &HashSet<Card>) -> Option<Set> {
+pub fn find_all_sets(board: &HashSet<Card>) -> HashSet<Set> {
     let board_clone = board.clone();
+
+    let mut sets_set = HashSet::new();
 
     for card1 in &board_clone {
         let mut card_for_difference: HashSet<Card> = HashSet::new();
@@ -118,12 +120,13 @@ pub fn find_a_set(board: &HashSet<Card>) -> Option<Set> {
             // println!("Extrapolated third: {}", extrapolated_card);
             if board.contains(&extrapolated_card) {
                 // println!("Found set: \n{}\n{}\n{}", card1, card2, extrapolated_card);
-                return Some(Set::new(card1.clone(), *card2.clone(), extrapolated_card.clone()));
+                let found_set = Set::new(card1.clone(), *card2.clone(), extrapolated_card.clone());
+                sets_set.insert(found_set);
             }
         }
     }
 
-    None
+    sets_set
 }
 
 #[cfg(test)]

@@ -1,8 +1,7 @@
 use std::collections::HashSet;
 use set::card::Card;
-use set::solving::find_a_set;
-// use set::{CardNumber::*, CardShading::*, CardColour::*, CardShape::*};
-//
+use set::solving::find_all_sets;
+
 // TODO
 // - write unit tests for solving
 
@@ -20,8 +19,8 @@ fn main() {
         }
     }
 
-    match find_a_set(&board) {
-        Some(set) => println!("There's a set! {}", set),
-        None => println!("There's no set."),
+    let all_sets = find_all_sets(&board);
+    for set in all_sets {
+        println!("{}", set);
     }
 }

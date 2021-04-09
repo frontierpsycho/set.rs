@@ -1,7 +1,9 @@
 use std::fmt::{self, Formatter, Display};
+use std::hash::{Hash, Hasher};
 use std::collections::HashSet;
 use crate::card::Card;
 
+#[derive(PartialEq, Eq)]
 pub struct Set {
     pub cards: HashSet<Card>,
 }
@@ -17,11 +19,16 @@ impl Set {
     }
 }
 
-// TODO do we need sorting? Or does the set take care of it?
+impl Hash for Set {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.to_string().hash(state);
+    }
+}
 
-impl fmt::Display for Set {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let card_vector: Vec<&Card> = self.cards.iter().collect();
+impl Display for Set {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        let mut card_vector: Vec<&Card> = self.cards.iter().collect();
+        card_vector.sort();
         write!(f, "{}, {}, {}", card_vector[0], card_vector[1], card_vector[2])
     }
 }
