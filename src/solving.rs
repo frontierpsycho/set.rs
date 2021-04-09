@@ -1,5 +1,10 @@
 use std::collections::HashSet;
 use crate::card::{*};
+use crate::set::Set;
+
+fn print_type_of<T>(_: &T) {
+    println!("{}", std::any::type_name::<T>())
+}
 
 fn test_attribute(
     value1: &u32,
@@ -96,7 +101,29 @@ pub fn extrapolate_third(card1: &Card, card2: &Card) -> Card {
         }
     };
 
-    Card { number: number, shading: shading, colour: colour, shape: shape }
+    Card { number, shading, colour, shape }
+}
+
+pub fn find_a_set(board: &HashSet<Card>) -> Option<Set> {
+    let board_clone = board.clone();
+
+    for card1 in &board_clone {
+        let mut card_for_difference: HashSet<Card> = HashSet::new();
+        card_for_difference.insert(*card1);
+
+        let board_without_card1 = board_clone.difference(&card_for_difference).collect::<HashSet<&Card>>();
+
+        for card2 in &board_without_card1 {
+            let extrapolated_card = extrapolate_third(&card1, &card2);
+            // println!("Extrapolated third: {}", extrapolated_card);
+            if board.contains(&extrapolated_card) {
+                // println!("Found set: \n{}\n{}\n{}", card1, card2, extrapolated_card);
+                return Some(Set::new(card1.clone(), *card2.clone(), extrapolated_card.clone()));
+            }
+        }
+    }
+
+    None
 }
 
 #[cfg(test)]
