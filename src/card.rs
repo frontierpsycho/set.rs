@@ -179,7 +179,7 @@ pub struct Card {
 }
 
 impl Card {
-    pub fn new() -> Self {
+    pub fn random() -> Self {
         // TODO OK, perhaps don't panic. Perhaps return Result?
         let number = random_card_number().unwrap(); // yeah, this panics, it's alright
         let shading = random_card_shading().unwrap(); // yeah, this panics, it's alright

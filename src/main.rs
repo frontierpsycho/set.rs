@@ -12,7 +12,7 @@ fn main() {
     loop {
         count += 1;
 
-        board.insert(Card::new());
+        board.insert(Card::random());
 
         if count == 12 {
             break;
