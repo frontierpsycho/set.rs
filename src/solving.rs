@@ -2,10 +2,6 @@ use std::collections::HashSet;
 use crate::card::{*};
 use crate::set::Set;
 
-fn print_type_of<T>(_: &T) {
-    println!("{}", std::any::type_name::<T>())
-}
-
 fn test_attribute(
     value1: &u32,
     value2: &u32,
