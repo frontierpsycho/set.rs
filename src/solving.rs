@@ -31,6 +31,22 @@ pub fn test_shape( card1: &Card, card2: &Card, card3: &Card) -> bool {
     test_attribute(&(card1.shape as u32), &(card2.shape as u32), &(card3.shape as u32))
 }
 
+pub fn extrapolate_third(card1: &Card, card2: &Card) -> Card {
+    let number = {
+        // if both are the same, the third should also have the same
+        if card1.number == card2.number {
+            card1.number
+        } else {
+            // TODO no, extrapolate third
+            card1.number
+        }
+    };
+
+    println!("Extrapolated number (should be three): {}", number);
+
+    Card::new()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -51,5 +67,13 @@ mod tests {
         // 2 and 1 should be negative
         assert_eq!(test_colour(&card1, &card2, &card3), false);
         assert_eq!(test_shape(&card1, &card2, &card3), false);
+    }
+
+    #[test]
+    fn test_extrapolate_third() {
+        let card1 = Card { number: One, shading: Solid, colour: Red, shape: Squiggle };
+        let card2 = Card { number: Two, shading: Striped, colour: Purple, shape: Squiggle };
+
+        extrapolate_third(&card1, &card2);
     }
 }
