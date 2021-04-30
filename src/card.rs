@@ -1,5 +1,5 @@
 use std::fmt::{self, Formatter, Display};
-use std::collections::HashMap;
+use std::collections::HashSet;
 use lazy_static::lazy_static;
 use rand::random;
 
@@ -11,12 +11,9 @@ pub enum CardNumber {
 }
 
 lazy_static! {
-    pub static ref CARDNUMBERS: HashMap<CardNumber, &'static str> = {
-        let mut m = HashMap::with_capacity(3);
-        m.insert(CardNumber::One, "one");
-        m.insert(CardNumber::Two, "two");
-        m.insert(CardNumber::Three, "three");
-        m
+    pub static ref CARDNUMBERS: HashSet<CardNumber> = {
+        let card_number_array: [CardNumber; 3] = [CardNumber::One, CardNumber::Two, CardNumber::Three];
+        card_number_array.iter().cloned().collect()
     };
 }
 
@@ -38,12 +35,9 @@ pub enum CardShading {
 }
 
 lazy_static! {
-    pub static ref CARDSHADINGS: HashMap<CardShading, &'static str> = {
-        let mut m = HashMap::with_capacity(3);
-        m.insert(CardShading::Solid, "solid");
-        m.insert(CardShading::Striped, "striped");
-        m.insert(CardShading::Outlined, "outlined");
-        m
+    pub static ref CARDSHADINGS: HashSet<CardShading> = {
+        let card_shading_array: [CardShading; 3] = [CardShading::Solid, CardShading::Striped, CardShading::Outlined];
+        card_shading_array.iter().cloned().collect()
     };
 }
 
@@ -65,12 +59,9 @@ pub enum CardColour {
 }
 
 lazy_static! {
-    pub static ref CARDCOLOURS: HashMap<CardColour, &'static str> = {
-        let mut m = HashMap::with_capacity(3);
-        m.insert(CardColour::Red, "red");
-        m.insert(CardColour::Purple, "purple");
-        m.insert(CardColour::Green, "green");
-        m
+    pub static ref CARDCOLOURS: HashSet<CardColour> = {
+        let card_colour_array: [CardColour; 3] = [CardColour::Red, CardColour::Purple, CardColour::Green];
+        card_colour_array.iter().cloned().collect()
     };
 }
 
@@ -92,12 +83,9 @@ pub enum CardShape {
 }
 
 lazy_static! {
-    pub static ref CARDSHAPES: HashMap<CardShape, &'static str> = {
-        let mut m = HashMap::with_capacity(3);
-        m.insert(CardShape::Oval, "oval");
-        m.insert(CardShape::Diamond, "diamond");
-        m.insert(CardShape::Squiggle, "squiggle");
-        m
+    pub static ref CARDSHAPES: HashSet<CardShape> = {
+        let card_shape_array: [CardShape; 3] = [CardShape::Oval, CardShape::Diamond, CardShape::Squiggle];
+        card_shape_array.iter().cloned().collect()
     };
 }
 
