@@ -117,56 +117,45 @@ impl fmt::Display for CardShape {
 fn random_card_number() -> Result<CardNumber, String>  {
     let index = random::<u32>() % 3;
 
-    if CardNumber::One as u32 == index {
-        return Ok(CardNumber::One);
-    } else if CardNumber::Two as u32 == index {
-        return Ok(CardNumber::Two);
-    } else if CardNumber::Three as u32 == index {
-        return Ok(CardNumber::Three);
-    } else {
-        return Err(format!("No valid card number found for {}", index));
+    return match index {
+        _i if CardNumber::One as u32 == index => Ok(CardNumber::One),
+        _i if CardNumber::Two as u32 == index => Ok(CardNumber::Two),
+        _i if CardNumber::Three as u32 == index => Ok(CardNumber::Three),
+        _ => Err(format!("No valid card number found for {}", index)),
     }
 }
 
 fn random_card_shading() -> Result<CardShading, String>  {
     let index = random::<u32>() % 3;
 
-    if CardShading::Solid as u32 == index {
-        return Ok(CardShading::Solid);
-    } else if CardShading::Striped as u32 == index {
-        return Ok(CardShading::Striped);
-    } else if CardShading::Outlined as u32 == index {
-        return Ok(CardShading::Outlined);
-    } else {
-        return Err(format!("No valid card shading found for {}", index));
+
+    return match index {
+        _i if CardShading::Solid as u32 == index => Ok(CardShading::Solid),
+        _i if CardShading::Striped as u32 == index => Ok(CardShading::Striped),
+        _i if CardShading::Outlined as u32 == index => Ok(CardShading::Outlined),
+        _ => Err(format!("No valid card shading found for {}", index)),
     }
 }
 
 fn random_card_colour() -> Result<CardColour, String>  {
     let index = random::<u32>() % 3;
 
-    if CardColour::Red as u32 == index {
-        return Ok(CardColour::Red);
-    } else if CardColour::Purple as u32 == index {
-        return Ok(CardColour::Purple);
-    } else if CardColour::Green as u32 == index {
-        return Ok(CardColour::Green);
-    } else {
-        return Err(format!("No valid card colour found for {}", index));
+    return match index {
+        _i if CardColour::Red as u32 == index => Ok(CardColour::Red),
+        _i if CardColour::Purple as u32 == index => Ok(CardColour::Purple),
+        _i if CardColour::Green as u32 == index => Ok(CardColour::Green),
+        _ => Err(format!("No valid card colour found for {}", index)),
     }
 }
 
 fn random_card_shape() -> Result<CardShape, String>  {
     let index = random::<u32>() % 3;
 
-    if CardShape::Oval as u32 == index {
-        return Ok(CardShape::Oval);
-    } else if CardShape::Diamond as u32 == index {
-        return Ok(CardShape::Diamond);
-    } else if CardShape::Squiggle as u32 == index {
-        return Ok(CardShape::Squiggle);
-    } else {
-        return Err(format!("No valid card shape found for {}", index));
+    return match index {
+        _i if CardShape::Oval as u32 == index => Ok(CardShape::Oval),
+        _i if CardShape::Diamond as u32 == index => Ok(CardShape::Diamond),
+        _i if CardShape::Squiggle as u32 == index => Ok(CardShape::Squiggle),
+        _ => Err(format!("No valid card shape found for {}", index)),
     }
 }
 
