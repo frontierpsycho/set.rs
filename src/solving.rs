@@ -34,66 +34,68 @@ pub fn test_shape( card1: &Card, card2: &Card, card3: &Card) -> bool {
 
 pub fn extrapolate_third(card1: &Card, card2: &Card) -> Card {
     let number = {
-        // if both are the same, the third should also have the same
         if card1.number == card2.number {
+            // if both are the same, the third should also have the same
             card1.number
         } else {
-            // blech
-            let mut extrapolated_third: CardNumber = card1.number;
-            for (&card_number, _) in CARDNUMBERS.iter() {
-                if card_number != card1.number && card_number != card2.number {
-                    extrapolated_third = card_number;
-                }
-            }
-            extrapolated_third
+            // otherwise, get the third value
+
+            // create a set of the input card numbers
+            let value_set: HashSet<CardNumber> = [card1.number, card2.number].iter().cloned().collect();
+
+            let extrapolated_third = CARDNUMBERS.difference(&value_set) // difference between all card numbers and input ones
+                .into_iter().next() // get first (as an option)
+                .unwrap(); // unwrap option, no way this is None
+
+            *extrapolated_third
         }
     };
 
     let shading = {
-        // if both are the same, the third should also have the same
         if card1.shading == card2.shading {
+            // if both are the same, the third should also have the same
             card1.shading
         } else {
-            // blech
-            let mut extrapolated_third: CardShading = card1.shading;
-            for (&card_shading, _) in CARDSHADINGS.iter() {
-                if card_shading != card1.shading && card_shading != card2.shading {
-                    extrapolated_third = card_shading;
-                }
-            }
-            extrapolated_third
+            // otherwise, get the third value
+            let value_set: HashSet<CardShading> = [card1.shading, card2.shading].iter().cloned().collect();
+
+            let extrapolated_third = CARDSHADINGS.difference(&value_set)
+                .into_iter().next()
+                .unwrap();
+
+            *extrapolated_third
         }
     };
 
     let colour = {
-        // if both are the same, the third should also have the same
         if card1.colour == card2.colour {
+            // if both are the same, the third should also have the same
             card1.colour
         } else {
-            // blech
-            let mut extrapolated_third: CardColour = card1.colour;
-            for (&card_colour, _) in CARDCOLOURS.iter() {
-                if card_colour != card1.colour && card_colour != card2.colour {
-                    extrapolated_third = card_colour;
-                }
-            }
-            extrapolated_third
+            // otherwise, get the third value
+            let value_set: HashSet<CardColour> = [card1.colour, card2.colour].iter().cloned().collect();
+
+            let extrapolated_third = CARDCOLOURS.difference(&value_set)
+                .into_iter().next()
+                .unwrap();
+
+            *extrapolated_third
         }
     };
 
     let shape = {
-        // if both are the same, the third should also have the same
         if card1.shape == card2.shape {
+            // if both are the same, the third should also have the same
             card1.shape
         } else {
-            // blech
-            let mut extrapolated_third: CardShape = card1.shape;
-            for (&card_shape, _) in CARDSHAPES.iter() {
-                if card_shape != card1.shape && card_shape != card2.shape {
-                    extrapolated_third = card_shape;
-                }
-            }
-            extrapolated_third
+            // otherwise, get the third value
+            let value_set: HashSet<CardShape> = [card1.shape, card2.shape].iter().cloned().collect();
+
+            let extrapolated_third = CARDSHAPES.difference(&value_set)
+                .into_iter().next()
+                .unwrap();
+
+            *extrapolated_third
         }
     };
 
